@@ -10,6 +10,8 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface FskNotesList {
+    }
 }
 declare global {
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
@@ -24,9 +26,16 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLFskNotesListElement extends Components.FskNotesList, HTMLStencilElement {
+    }
+    var HTMLFskNotesListElement: {
+        prototype: HTMLFskNotesListElement;
+        new (): HTMLFskNotesListElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-root": HTMLAppRootElement;
+        "fsk-notes-list": HTMLFskNotesListElement;
     }
 }
 declare namespace LocalJSX {
@@ -34,9 +43,12 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface FskNotesList {
+    }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-root": AppRoot;
+        "fsk-notes-list": FskNotesList;
     }
 }
 export { LocalJSX as JSX };
@@ -45,6 +57,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "fsk-notes-list": LocalJSX.FskNotesList & JSXBase.HTMLAttributes<HTMLFskNotesListElement>;
         }
     }
 }
