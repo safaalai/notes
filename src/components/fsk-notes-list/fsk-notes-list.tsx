@@ -1,4 +1,5 @@
 import { Component, ComponentInterface, h } from '@stencil/core';
+import { getList } from '../../library/NotesData';
 
 /** 
  * Lists notes
@@ -12,7 +13,16 @@ export class FskNotesList implements ComponentInterface {
 
   render() {
     return (
-      <div>TODO: Create notes-list render</div>
+      <div>
+        <div>Notes List</div>
+        <table>
+          <thead>
+            <tr>
+              <th>{getList()}</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     );
   }
 
