@@ -1,3 +1,10 @@
+/**
+ * Data library for Notes
+ * @packageDocumentation
+ */
+/**
+ * @ignore
+ */
 const list = 
   `[
     {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
@@ -6,6 +13,9 @@ const list =
     {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
   ]`;
 
+/**
+ * Returns list of all notes
+ */
 export function getList() {
     return(JSON.parse(list));
 }
