@@ -34,22 +34,22 @@ describe('fsk-notes-list', () => {
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>2020-03-01T10:10Z</td>
+                  <td>March 1, 2020 2:10 AM</td>
                   <td>My First Note</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>2020-03-02T11:11Z</td>
+                  <td>March 2, 2020 3:11 AM</td>
                   <td>My Second Note</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>2020-03-03T12:12Z</td>
+                  <td>March 3, 2020 4:12 AM</td>
                   <td>My Third Note</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>2020-03-04T13:13Z</td>
+                  <td>March 4, 2020 5:13 AM</td>
                   <td>My Fourth Note</td>
                 </tr>
               </tbody>
