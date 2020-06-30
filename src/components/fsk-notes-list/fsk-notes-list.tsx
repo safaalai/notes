@@ -20,7 +20,6 @@ export class FskNotesList implements ComponentInterface {
     //console.log(notes);
     return (
       <div>
-        <div>Notes List</div>
         <table>
           <thead>
             <tr>

@@ -22,7 +22,6 @@ describe('fsk-notes-list', () => {
       <fsk-notes-list>
         <mock:shadow-root>
           <div>
-            <div>Notes List</div>
             <table>
               <thead>
                 <tr>
