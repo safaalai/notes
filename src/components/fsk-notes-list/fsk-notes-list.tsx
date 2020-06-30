@@ -16,7 +16,7 @@ dayjs.locale('en');
 export class FskNotesList implements ComponentInterface {
 
   render() {
-    const notes = getList();
+    const notes = getList().reverse();
     //console.log(notes);
     return (
       <div>
