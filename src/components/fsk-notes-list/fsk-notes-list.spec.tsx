@@ -31,22 +31,22 @@ describe('fsk-notes-list', () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr id="note4">
                   <td>1</td>
                   <td>March 4, 2020 5:13 AM</td>
                   <td>My Fourth Note</td>
                 </tr>
-                <tr>
+                <tr id="note3">
                   <td>2</td>
                   <td>March 3, 2020 4:12 AM</td>
                   <td>My Third Note</td>
                 </tr>
-                <tr>
+                <tr id="note2">
                   <td>3</td>
                   <td>March 2, 2020 3:11 AM</td>
                   <td>My Second Note</td>
                 </tr>
-                <tr>
+                <tr id="note1">
                   <td>4</td>
                   <td>March 1, 2020 2:10 AM</td>
                   <td>My First Note</td>
@@ -57,5 +57,21 @@ describe('fsk-notes-list', () => {
         </mock:shadow-root>
       </fsk-notes-list>
     `);
+  });
+
+  it('should handle row click', async () => {
+    const page = await newSpecPage({
+      components: [FskNotesList],
+      html: `<fsk-notes-list></fsk-notes-list>`,
+    });
+
+    const row : HTMLElement = (page.root.shadowRoot.querySelector("#note1"));
+    const spy = jest.fn();
+    page.win.addEventListener('selectedNote',spy);
+    row.click();
+    await page.waitForChanges();
+
+    expect(spy).toHaveBeenCalled();
+    expect(spy.mock.calls[0][0].detail).toBe('1');
   });
 });

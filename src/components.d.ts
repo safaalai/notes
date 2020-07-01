@@ -44,6 +44,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface FskNotesList {
+        "onSelectedNote"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
