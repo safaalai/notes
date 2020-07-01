@@ -17,7 +17,7 @@ dayjs.locale('en');
 export class FskNotesList implements ComponentInterface {
   @Event() selectedNote: EventEmitter;
   onSelectNote(noteid: number) {
-    console.log(noteid);
+    //console.log(noteid);
     this.selectedNote.emit(noteid);
   }
 
