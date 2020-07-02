@@ -11,6 +11,10 @@ export namespace Components {
     interface AppRoot {
     }
     interface FskNote {
+        /**
+          * HTML property note-id: id of the note to display
+         */
+        "noteId": number;
     }
     interface FskNotesList {
     }
@@ -53,6 +57,10 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface FskNote {
+        /**
+          * HTML property note-id: id of the note to display
+         */
+        "noteId"?: number;
     }
     interface FskNotesList {
         /**

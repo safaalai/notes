@@ -33,7 +33,7 @@ describe('app-home tests', () => {
     expect(page.root.shadowRoot).toEqualHtml(`
       <div class='app-home'>
         <fsk-notes-list></fsk-notes-list>
-        <fsk-note></fsk-note>
+        <fsk-note note-id="1"></fsk-note>
       </div>
     `);
   });

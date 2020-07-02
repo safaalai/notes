@@ -17,7 +17,7 @@ export class AppHome {
    */
   @Listen('selectedNote')
   onSelectedNote(event: CustomEvent) {
-    this.noteDisplay = <fsk-note></fsk-note>
+    this.noteDisplay = <fsk-note note-id={event.detail}></fsk-note>
   }
 
   render() {

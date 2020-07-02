@@ -5,12 +5,12 @@ describe('fsk-note', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [FskNote],
-      html: `<fsk-note></fsk-note>`,
+      html: `<fsk-note note-id="1"></fsk-note>`,
     });
     expect(page.root).toEqualHtml(`
-      <fsk-note>
+      <fsk-note note-id="1">
         <mock:shadow-root>
-          <div>TODO: Display a note</div>
+         <div>Now displaying note: 1</div>
         </mock:shadow-root>
       </fsk-note>
     `);

@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h } from '@stencil/core';
+import { Component, ComponentInterface, h, Prop } from '@stencil/core';
 
 /**
  * Displays a note
@@ -9,10 +9,12 @@ import { Component, ComponentInterface, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class FskNote implements ComponentInterface {
+  /** HTML property note-id: id of the note to display */
+  @Prop() noteId: number;
 
   render() {
     return (
-      <div>TODO: Display a note</div>
+      <div>Now displaying note: {this.noteId}</div>
     );
   }
 
