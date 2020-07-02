@@ -10,6 +10,8 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface FskNote {
+    }
     interface FskNotesList {
     }
 }
@@ -26,6 +28,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLFskNoteElement extends Components.FskNote, HTMLStencilElement {
+    }
+    var HTMLFskNoteElement: {
+        prototype: HTMLFskNoteElement;
+        new (): HTMLFskNoteElement;
+    };
     interface HTMLFskNotesListElement extends Components.FskNotesList, HTMLStencilElement {
     }
     var HTMLFskNotesListElement: {
@@ -35,6 +43,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-root": HTMLAppRootElement;
+        "fsk-note": HTMLFskNoteElement;
         "fsk-notes-list": HTMLFskNotesListElement;
     }
 }
@@ -43,12 +52,19 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface FskNote {
+    }
     interface FskNotesList {
+        /**
+          * Sent when user selects a note by clicking on it
+          * @event
+         */
         "onSelectedNote"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-root": AppRoot;
+        "fsk-note": FskNote;
         "fsk-notes-list": FskNotesList;
     }
 }
@@ -58,6 +74,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "fsk-note": LocalJSX.FskNote & JSXBase.HTMLAttributes<HTMLFskNoteElement>;
             "fsk-notes-list": LocalJSX.FskNotesList & JSXBase.HTMLAttributes<HTMLFskNotesListElement>;
         }
     }
