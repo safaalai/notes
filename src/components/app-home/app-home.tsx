@@ -6,8 +6,15 @@ import { Component, h, Listen, State } from '@stencil/core';
   shadow: true
 })
 export class AppHome {
+  /** 
+   * Will cause render to display the contents of a note
+   */
   @State() noteDisplay = '';
 
+  /**
+   * Event handler for selectedNote event
+   * @param event - selectedNote event received when user selects note
+   */
   @Listen('selectedNote')
   onSelectedNote(event: CustomEvent) {
     this.noteDisplay = <p>Now showing note {event.detail}</p>
