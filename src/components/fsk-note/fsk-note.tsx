@@ -15,6 +15,10 @@ export class FskNote implements ComponentInterface {
   render() {
     return (
       <div class="fsk-note">
+        <header class="fsk-note-header">
+          <strong>Note Title</strong>
+          <nav class="fsk-note-button">Close</nav>
+        </header>
         <div class="fsk-note-content">
           Now displaying note: {this.noteId}
         </div>
