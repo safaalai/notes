@@ -14,6 +14,15 @@ const list = JSON.parse(
   ]`
 );
 
+const text = JSON.parse(
+  `[
+    {"id":"1","text":"Text for my first note"},
+    {"id":"2","text":"Text for my Second note"},
+    {"id":"3","text":"Text for my Third note"},
+    {"id":"4","text":"Text for my Fourth note"}
+  ]`
+);
+
 /**
  * Returns list of all notes
  */
@@ -26,5 +35,8 @@ export function getList() {
  * @param id : Id of the note to fetch
  */
 export function getNote(id: number) {
-  return(list[id-1]);
+  const note = list[id-1];
+  const clonedNote = Object.assign({},note);
+  clonedNote.text = text[id-1].text;
+  return(clonedNote);
 }

@@ -16,7 +16,8 @@ describe('NotesData Tests', () => {
 
   test('getNote returns expected note', () => {
     const expectedResults = JSON.parse(`
-      {"datetime": "2020-03-01T10:10Z", "id": "1", "title": "My First Note"}
+      {"datetime": "2020-03-01T10:10Z", "id": "1", "title": "My First Note",
+       "text":"Text for my first note"}
     `);
     expect(notesData.getNote(1)).toEqual(expectedResults);
   });
