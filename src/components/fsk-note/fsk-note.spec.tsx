@@ -2,7 +2,8 @@ import { newSpecPage } from '@stencil/core/testing';
 
 const list = JSON.parse(
   `[
-    {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
+    {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note",
+     "text":"text for note id 1"},
     {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
     {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
     {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
@@ -29,7 +30,7 @@ describe('fsk-note', () => {
               <nav class="fsk-note-button">Close</nav>
             </header>
             <div class="fsk-note-content">
-              Now displaying note: 1
+              text for note id 1
             </div>
           </div>
         </mock:shadow-root>

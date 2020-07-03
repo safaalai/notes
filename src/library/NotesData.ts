@@ -27,7 +27,8 @@ const text = JSON.parse(
  * Returns list of all notes
  */
 export function getList() {
-    return(list);
+  const clonedList = JSON.parse(JSON.stringify(list));
+  return(clonedList);
 }
 
 /**

@@ -35,7 +35,7 @@ export class FskNote implements ComponentInterface {
           </nav>
         </header>
         <div class="fsk-note-content">
-          Now displaying note: {this.noteId}
+          {note.text}
         </div>
       </div>
     );
