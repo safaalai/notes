@@ -20,6 +20,9 @@ export class AppHome {
     this.noteDisplay = <fsk-note note-id={event.detail}></fsk-note>
   }
 
+  @Listen('closeNote')
+  onClose() { this.noteDisplay = ''; }
+
   render() {
     return (
       <div class='app-home'>
