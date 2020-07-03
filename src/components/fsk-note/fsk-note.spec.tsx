@@ -23,4 +23,21 @@ describe('fsk-note', () => {
       </fsk-note>
     `);
   });
+
+  it('should emit event when the close button is clicked', async () => {
+    const page = await newSpecPage({
+      components: [FskNote],
+      html: `<fsk-note note-id="1"></fsk-note>`,
+    });
+
+    const button : HTMLElement 
+      = (page.root.shadowRoot.querySelector(".fsk-note-button"));
+    const spy = jest.fn();
+    page.win.addEventListener('closeNote',spy);
+
+    button.click();
+    await page.waitForChanges();
+
+    expect(spy).toHaveBeenCalled();
+  });
 });
