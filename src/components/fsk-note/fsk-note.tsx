@@ -27,16 +27,16 @@ export class FskNote implements ComponentInterface {
     return (
       <div class="fsk-note">
         <header class="fsk-note-header">
-          <strong>{note.title}</strong>
+          <input value={note.title}/>
           <nav 
             onClick={() => this.onClose()} 
             class="fsk-note-button">
             Close
           </nav>
         </header>
-        <div class="fsk-note-content">
+        <textarea class="fsk-note-content">
           {note.text}
-        </div>
+        </textarea>
       </div>
     );
   }
