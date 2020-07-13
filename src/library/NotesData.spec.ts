@@ -21,4 +21,15 @@ describe('NotesData Tests', () => {
     `);
     expect(notesData.getNote(1)).toEqual(expectedResults);
   });
+
+  test('saveNote should save a note', () => {
+    const expectedResults = JSON.parse(`
+      {"datetime": "2020-03-01T10:10Z", "id": "1", 
+      "title": "Edited Test Title",
+       "text":"Edited Test Text"}
+    `);
+
+    notesData.saveNote(1, "Edited Test Title", "Edited Test Text");
+    expect(notesData.getNote(1)).toEqual(expectedResults);
+  });
 });

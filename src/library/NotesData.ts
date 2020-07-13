@@ -41,3 +41,17 @@ export function getNote(id: number) {
   clonedNote.text = text[id-1].text;
   return(clonedNote);
 }
+
+/**
+ * Save a note
+ * @param id : Id of the note to save
+ * @param newTitle : new title for the note
+ * @param newText : editted text for the note
+ */
+export function saveNote(id: number, newTitle: string, newText: string) {
+  const note = list[id-1];
+  note.title = newTitle;
+
+  const noteText = text[id-1];
+  noteText.text = newText;
+}
