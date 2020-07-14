@@ -10,8 +10,13 @@ const list = JSON.parse(
   ]`
 );
 
+const saveOut = [];
 jest.mock('../../library/NotesData', () => ({
-  getNote: (id: number) => {return list[id-1]}
+  getNote: (id: number) => {return list[id-1]},
+  saveNote: (id: number, title: string, text: string) => {
+    const saved = {id: id, title: title, text: text};
+    saveOut.push(saved);
+  }
 }));
 import { FskNote } from './fsk-note';
 
@@ -30,7 +35,7 @@ describe('fsk-note', () => {
               <nav id="fsk-note-save" class="fsk-note-button">Save</nav>
               <nav id="fsk-note-close" class="fsk-note-button">Close</nav>
             </header>
-            <textarea class="fsk-note-content">
+            <textarea id="fsk-note-content">
               text for note id 1
             </textarea>
           </div>
@@ -54,5 +59,33 @@ describe('fsk-note', () => {
     await page.waitForChanges();
 
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should save note when save button is clicked', async () => {
+    // Fetch the page
+    const page = await newSpecPage({
+      components: [FskNote],
+      html: `<fsk-note note-id="1"></fsk-note>`,
+    });
+
+    // Change values for title and content of the note
+    const title : HTMLInputElement =
+      (page.root.shadowRoot.querySelector('#fsk-note-title'));
+    title.value = "Test Note Title";
+
+    const content : HTMLInputElement =
+      (page.root.shadowRoot.querySelector('#fsk-note-content'));
+    content.value = "Test Note Content";
+
+    // Click on the save button
+    const button : HTMLElement =
+      (page.root.shadowRoot.querySelector('#fsk-note-save'));
+    button.click();
+    await page.waitForChanges();
+
+    // Check results are as expected
+    const expectedSave =
+      {id: 1, title:'Test Note Title', text:'Test Note Content'};
+    expect(JSON.stringify(saveOut[0])).toBe(JSON.stringify(expectedSave));
   });
 });
