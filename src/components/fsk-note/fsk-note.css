@@ -15,6 +15,7 @@
 
 .fsk-note-button {
   cursor: pointer;
+  padding-left: 10px;
 }
 
 .fsk-note-header {
@@ -23,9 +24,14 @@
   justify-content: space-between;
   top: 0;
   left: 10px;
-  height: 20px;
+  height: 40px;
   width: 95%;
   padding: 5px 5px 0px 0px;
+}
+
+#fsk-note-title {
+  flex-grow: 1;
+  font-size: 1rem;
 }
 
 .fsk-note-content {
@@ -35,4 +41,5 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+  font-size: 1rem;
 }

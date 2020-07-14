@@ -22,15 +22,21 @@ export class FskNote implements ComponentInterface {
   /** Called from HTML when user clicks on the close button */
   onClose() { this.closeNote.emit(); }
 
+  /** Called from HTML when user clicks on the save button */
+  onSave() { 
+    console.log('save button');
+  }
+
   render() {
     const note = getNote(this.noteId);
     return (
       <div class="fsk-note">
         <header class="fsk-note-header">
-          <input value={note.title}/>
-          <nav 
-            onClick={() => this.onClose()} 
-            class="fsk-note-button">
+          <input id="fsk-note-title" value={note.title}/>
+          <nav id="fsk-note-save" onClick={() => this.onSave()} class="fsk-note-button">
+            Save
+          </nav>
+          <nav id="fsk-note-close" onClick={() => this.onClose()} class="fsk-note-button">
             Close
           </nav>
         </header>

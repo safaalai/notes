@@ -26,8 +26,9 @@ describe('fsk-note', () => {
         <mock:shadow-root>
           <div class="fsk-note">
             <header class="fsk-note-header">
-              <input value="My First Note"> 
-              <nav class="fsk-note-button">Close</nav>
+              <input id="fsk-note-title" value="My First Note">
+              <nav id="fsk-note-save" class="fsk-note-button">Save</nav>
+              <nav id="fsk-note-close" class="fsk-note-button">Close</nav>
             </header>
             <textarea class="fsk-note-content">
               text for note id 1
@@ -45,7 +46,7 @@ describe('fsk-note', () => {
     });
 
     const button : HTMLElement 
-      = (page.root.shadowRoot.querySelector(".fsk-note-button"));
+      = (page.root.shadowRoot.querySelector("#fsk-note-close"));
     const spy = jest.fn();
     page.win.addEventListener('closeNote',spy);
 
