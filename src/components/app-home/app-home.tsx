@@ -1,4 +1,5 @@
 import { Component, h, Listen, State } from '@stencil/core';
+import { addNote } from '../../library/NotesData';
 
 @Component({
   tag: 'app-home',
@@ -20,12 +21,22 @@ export class AppHome {
     this.noteDisplay = <fsk-note note-id={event.detail}></fsk-note>
   }
 
+  /** Event handler for closeNote event */
   @Listen('closeNote')
   onClose() { this.noteDisplay = ''; }
+
+  /** Event handler for add note button press */
+  onAddNote() {
+    const noteId = addNote();
+    this.noteDisplay = <fsk-note note-id={noteId}></fsk-note>
+  }
 
   render() {
     return (
       <div class='app-home'>
+        <button id="app-home-add-note" onClick={() => this.onAddNote()}>
+          Add Note
+        </button>
         <fsk-notes-list></fsk-notes-list>
         {this.noteDisplay}
       </div>

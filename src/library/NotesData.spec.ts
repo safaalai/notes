@@ -49,7 +49,8 @@ describe('NotesData Tests', () => {
       );
 
     // Add note 5 & check for results
-    notesData.addNote();
+    const newNoteId = notesData.addNote();
+    expect(newNoteId).toBe(5);
     expect(notesData.getNote(5)).toEqual(expectedResults);
   });
 });
