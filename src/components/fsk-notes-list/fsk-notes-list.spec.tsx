@@ -94,4 +94,19 @@ describe('fsk-notes-list', () => {
 
     expect(getNotesListCount).toBe(countBefore+1);
   });
+
+  it('should fetch notes list if saveNote event is received', async () => {
+    const page = await newSpecPage({
+      components: [FskNotesList],
+      html: `<fsk-notes-list></fsk-notes-list>`,
+    });
+
+    const countBefore = getNotesListCount;
+    const body : HTMLBodyElement = page.doc.querySelector('body');
+    const saveNoteEvent = new CustomEvent('saveNote');
+    body.dispatchEvent(saveNoteEvent);
+    await page.waitForChanges();
+
+    expect(getNotesListCount).toBe(countBefore+1);
+  });
 });

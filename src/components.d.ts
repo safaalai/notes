@@ -66,6 +66,11 @@ declare namespace LocalJSX {
           * @event
          */
         "onCloseNote"?: (event: CustomEvent<any>) => void;
+        /**
+          * Sent when user clicks on the save button
+          * @event
+         */
+        "onSaveNote"?: (event: CustomEvent<any>) => void;
     }
     interface FskNotesList {
         /**

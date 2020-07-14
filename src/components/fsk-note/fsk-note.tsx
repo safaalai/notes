@@ -24,6 +24,11 @@ export class FskNote implements ComponentInterface {
   /** Called from HTML when user clicks on the close button */
   onClose() { this.closeNote.emit(); }
 
+  /** Sent when user clicks on the save button
+   * @event
+   */
+  @Event() saveNote: EventEmitter;
+
   /** Called from HTML when user clicks on the save button */
   onSave() { 
     const root = this.el.shadowRoot;
@@ -31,6 +36,7 @@ export class FskNote implements ComponentInterface {
     const text : HTMLInputElement = root.querySelector('#fsk-note-content');
     console.log(title.value + "," + text.value);
     saveNote(this.noteId, title.value, text.value);
+    this.saveNote.emit();
   }
 
   render() {

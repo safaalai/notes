@@ -24,6 +24,12 @@ export class FskNotesList implements ComponentInterface {
     this.notes = getList().reverse();
   }
 
+  /** Listens to saveNote event issued by the note */
+  @Listen('saveNote',{target: 'body'})
+  onSaveNote() {
+    this.notes = getList().reverse();
+  }
+
   /** 
    * Sent when user selects a note by clicking on it
    * @event
