@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, h, Event } from '@stencil/core';
+import { Component, ComponentInterface, h, Event, State, Listen } from '@stencil/core';
 import { getList } from '../../library/NotesData';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
@@ -15,6 +15,15 @@ dayjs.locale('en');
   shadow: true,
 })
 export class FskNotesList implements ComponentInterface {
+  /** Note list state variable */
+  @State() notes = getList().reverse();
+
+  /** Listens to closeNote event issued by the note */
+  @Listen('closeNote',{target: 'body'})
+  onCloseNote() {
+    this.notes = getList().reverse();
+  }
+
   /** 
    * Sent when user selects a note by clicking on it
    * @event
@@ -31,7 +40,6 @@ export class FskNotesList implements ComponentInterface {
   }
 
   render() {
-    const notes = getList().reverse();
     //console.log(notes);
     return (
       <div>
@@ -44,7 +52,7 @@ export class FskNotesList implements ComponentInterface {
             </tr>
           </thead>
           <tbody>
-            {notes.map( (note:any, index:number) =>
+            {this.notes.map( (note:any, index:number) =>
               <tr id={'note'+note.id} onClick={() => this.onSelectNote(note.id)}>
                 <td>{index+1}</td>
                 <td>{dayjs(note.datetime)
