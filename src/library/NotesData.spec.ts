@@ -32,4 +32,24 @@ describe('NotesData Tests', () => {
     notesData.saveNote(1, "Edited Test Title", "Edited Test Text");
     expect(notesData.getNote(1)).toEqual(expectedResults);
   });
+
+  test('addNote should add a new note', () => {
+    const expectedResults = JSON.parse(`
+      {
+        "id":"5","datetime":"2020-05-14T11:20:00.000Z",
+        "title":"untitled",
+        "text":""
+      }
+    `);
+
+    // Mock Date.now() to return a fixed testable date-time
+    jest.spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-05-14T11:20Z').valueOf()
+      );
+
+    // Add note 5 & check for results
+    notesData.addNote();
+    expect(notesData.getNote(5)).toEqual(expectedResults);
+  });
 });

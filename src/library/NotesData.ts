@@ -55,3 +55,25 @@ export function saveNote(id: number, newTitle: string, newText: string) {
   const noteText = text[id-1];
   noteText.text = newText;
 }
+
+/**
+ * Adds a blank note to the list
+ * 
+ * @returns id of the note created
+ */
+export function addNote() : number {
+  const id = list.length + 1;
+  list.push({id: id.toString(), datetime: getDateTime(), title: 'untitled'});
+  text.push({id: id.toString(), text: ''});
+  return(id);
+}
+
+/**
+ * Gets current date and time in ISO format
+ * 
+ * @returns date time in ISO string format
+ */
+export function getDateTime(): string {
+  const date = new Date(Date.now());  // Use Date.now() to make code testable
+  return date.toISOString();
+}
