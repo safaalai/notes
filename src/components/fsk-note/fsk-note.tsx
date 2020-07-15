@@ -1,6 +1,6 @@
 import { Component, ComponentInterface, h, Prop, Event, Element } from '@stencil/core';
 import { EventEmitter } from '@stencil/router/dist/types/stencil.core';
-import { getNote, saveNote } from '../../library/NotesData';
+import { getNote, saveNote, deleteNote } from '../../library/NotesData';
 
 /**
  * Displays a note
@@ -39,16 +39,28 @@ export class FskNote implements ComponentInterface {
     this.saveNote.emit();
   }
 
+  /** Called from HTML when user clicks on the delete button */
+  onDelete() {
+    deleteNote(this.noteId);
+    this.closeNote.emit();
+  }
+
   render() {
     const note = getNote(this.noteId);
     return (
       <div class="fsk-note">
         <header class="fsk-note-header">
           <input id="fsk-note-title" value={note.title}/>
-          <nav id="fsk-note-save" onClick={() => this.onSave()} class="fsk-note-button">
+          <nav id="fsk-note-save" 
+            onClick={() => this.onSave()} class="fsk-note-button">
             Save
           </nav>
-          <nav id="fsk-note-close" onClick={() => this.onClose()} class="fsk-note-button">
+          <nav id="fsk-note-delete" 
+            onClick={() => this.onDelete()} class="fsk-note-button">
+            Delete
+          </nav>
+          <nav id="fsk-note-close" 
+            onClick={() => this.onClose()} class="fsk-note-button">
             Close
           </nav>
         </header>

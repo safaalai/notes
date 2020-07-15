@@ -80,3 +80,12 @@ export function addNote() : number {
   objText[newId] = {id: newId, text: ''};
   return(parseInt(newId));
 }
+
+/**
+ * Deletes a note
+ * @param id Id of note to be deleted
+ */
+export function deleteNote(id: number) {
+  delete objList[id.toString()];
+  delete objText[id.toString()];
+}
