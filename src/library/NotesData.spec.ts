@@ -22,6 +22,11 @@ describe('NotesData Tests', () => {
     expect(notesData.getNote(1)).toEqual(expectedResults);
   });
 
+  test('getNote returns empty object if id is invalid', () => {
+    const note = notesData.getNote(-1);
+    expect( Object.keys(note).length ).toBe(0);
+  });
+
   test('saveNote should save a note', () => {
     const expectedResults = JSON.parse(`
       {"datetime": "2020-03-01T10:10Z", "id": "1", 
