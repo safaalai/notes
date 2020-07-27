@@ -1,0 +1,14 @@
+{
+  "name": "gateway",
+  "version": "0.0.1",
+  "description": "Notes project for Full Stack Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Safa Alai",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
