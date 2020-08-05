@@ -1,0 +1,10 @@
+version: '3'
+ 
+services:
+ notes_gateway:
+   build:
+     context: .
+     dockerfile: Dockerfile
+   ports:
+     - 8080:8080
+     - 9229:9229
