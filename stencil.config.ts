@@ -6,6 +6,9 @@ export const config: Config = {
   globalStyle: 'src/global/app.css',
   globalScript: 'src/global/app.ts',
   taskQueue: 'async',
+  testing: {
+    testPathIgnorePatterns: ["/node_modules/","/server/"]
+  },
   outputTargets: [
     {
       type: 'www',
