@@ -1,11 +1,5 @@
 /** Main application router for gateway */
-import express from 'express';
-const app = express();
-
-app.get('/', (req,res) => {
-  console.log('get /');
-  res.send('Hello World!');
-});
+import {app} from './app';
 
 const port = process.env.port || 8080;
 app.listen(port, () => {
