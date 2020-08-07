@@ -16,18 +16,24 @@ dayjs.locale('en');
 })
 export class FskNotesList implements ComponentInterface {
   /** Note list state variable */
-  @State() notes = getList().reverse();
+  @State() notes = [];
+
+  async componentWillLoad() {
+    return getList().then( response => {
+      this.notes = response.reverse();
+    });
+  }
 
   /** Listens to closeNote event issued by the note */
   @Listen('closeNote',{target: 'body'})
-  onCloseNote() {
-    this.notes = getList().reverse();
+  async onCloseNote() {
+    this.notes = (await getList()).reverse();
   }
 
   /** Listens to saveNote event issued by the note */
   @Listen('saveNote',{target: 'body'})
-  onSaveNote() {
-    this.notes = getList().reverse();
+  async onSaveNote() {
+    this.notes = (await getList()).reverse();
   }
 
   /** 
