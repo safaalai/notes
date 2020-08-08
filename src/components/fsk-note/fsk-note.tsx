@@ -34,7 +34,7 @@ export class FskNote implements ComponentInterface {
     const root = this.el.shadowRoot;
     const title : HTMLInputElement = root.querySelector('#fsk-note-title');
     const text : HTMLInputElement = root.querySelector('#fsk-note-content');
-    console.log(title.value + "," + text.value);
+    //console.log(title.value + "," + text.value);
     saveNote(this.noteId, title.value, text.value);
     this.saveNote.emit();
   }

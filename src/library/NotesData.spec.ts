@@ -1,3 +1,6 @@
+import axios from 'axios';
+const mock = jest.spyOn(axios,'get');
+
 import * as notesData from './NotesData';
 
 describe('NotesData Tests', () => {
@@ -11,7 +14,9 @@ describe('NotesData Tests', () => {
   );
 
   test('getList returns expected data', async () => {
-    expect(notesData.getList()).toEqual(expectedData);
+    mock.mockResolvedValue({data: 'hello'});
+    const data = await notesData.getList();
+    expect(data).toEqual(expectedData);
   });
 
   test('getNote returns expected note', () => {

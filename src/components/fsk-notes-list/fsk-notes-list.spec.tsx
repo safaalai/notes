@@ -10,7 +10,7 @@ const data = JSON.parse(
   ]`);
 
 jest.mock('../../library/NotesData', () => ({
-  getList: () => {
+  getList: async () => {
     ++getNotesListCount;
     return(data);
   }
