@@ -13,7 +13,7 @@ const list = JSON.parse(
 let saveOut = [];
 let deleteId = -1;
 jest.mock('../../library/NotesData', () => ({
-  getNote: (id: number) => {return list[id-1]},
+  getNote: async (id: number) => {return list[id-1]},
   saveNote: (id: number, title: string, text: string) => {
     const saved = {id: id, title: title, text: text};
     saveOut.push(saved);
