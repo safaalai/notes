@@ -26,8 +26,8 @@ export class AppHome {
   onClose() { this.noteDisplay = ''; }
 
   /** Event handler for add note button press */
-  onAddNote() {
-    const noteId = addNote();
+  async onAddNote() {
+    const noteId = await addNote();
     this.noteDisplay = <fsk-note note-id={noteId}></fsk-note>
   }
 

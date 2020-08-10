@@ -2,7 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 
 let addNoteCount = 0;
 jest.mock('../../library/NotesData', () => ({
-  addNote: () => {
+  addNote: async () => {
     ++addNoteCount;
     return(5);
   }
@@ -82,6 +82,7 @@ describe('app-home tests', () => {
       page.root.shadowRoot.querySelector('#app-home-add-note');
     const oldCount = addNoteCount;
     button.click();
+    await page.waitForChanges();
     await page.waitForChanges();
 
     // check addNote library function was called
