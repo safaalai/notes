@@ -42,6 +42,9 @@ describe('NotesData Tests', () => {
        "text":"Edited Test Text"}
     `);
 
+    const putMock = jest.spyOn(axios,'put');
+    putMock.mockResolvedValue({data: 'putMock'});
+
     notesData.saveNote(1, "Edited Test Title", "Edited Test Text");
 
     getMock.mockResolvedValue({data: 'saved note'});
@@ -79,7 +82,9 @@ describe('NotesData Tests', () => {
   });
 
   test('deleteNote deletes the right note', async () => {
-    notesData.deleteNote(2);
+    const deleteMock = jest.spyOn(axios,'delete');
+    deleteMock.mockResolvedValue({data: 'deleteMock'});
+    await notesData.deleteNote(2);
 
     getMock.mockResolvedValue({data: 'deleted note'});
     const note = await notesData.getNote(2);
