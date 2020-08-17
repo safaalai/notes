@@ -3,9 +3,18 @@ import request from 'supertest';
 
 describe('Gateway API Tests', () => {
   it('should get the notes list', async () => {
+    const expectedData = JSON.parse(
+      `[
+        {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
+        {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
+        {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
+        {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
+      ]`    
+    );
+  
     const response = await request(app).get('/api/list');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('list');
+    expect(response.text).toBe(JSON.stringify(expectedData));
   });
 
   it('should get a note', async () => {

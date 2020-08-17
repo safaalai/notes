@@ -1,8 +1,9 @@
 import express from 'express';
+import * as data from './data';
 export const router = express.Router();
 
 router.get('/list', (req,res) => {
-  res.send('list');
+  res.json(data.getList());
 });
 
 router.get('/note/:id', (req,res) => {
