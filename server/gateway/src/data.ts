@@ -37,16 +37,27 @@ export function getList() : unknown {
 }
 
 /**
+ * Converts id to string and checks for validity
+ * @param id id to convert to string
+ * @throws Error if id is not valid
+ */
+function getStrId(id: string) : string {
+  if( !(id in objList) )
+    throw new Error("Note does not exist!");
+  else
+    return id;
+}
+
+/**
  * Fetches data for a single note
  * @param id : Id of the note to fetch
  */
-export function getNote(id: number) : unknown {
-  if( !(id.toString() in objList))
-    return({});
+export function getNote(id: string) : unknown {
+  const strId = getStrId(id);
 
-  const note = objList[id.toString()];
+  const note = objList[strId];
   const clonedNote = Object.assign({},note);
-  clonedNote.text = objText[id.toString()].text;
+  clonedNote.text = objText[strId].text;
   return(clonedNote);
 }
 

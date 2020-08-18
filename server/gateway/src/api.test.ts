@@ -18,9 +18,20 @@ describe('Gateway API Tests', () => {
   });
 
   it('should get a note', async () => {
+    const expectedResults = JSON.parse(`
+      {"id": "1", "datetime": "2020-03-01T10:10Z", "title": "My First Note",
+       "text":"Text for my first note"}
+    `);
+    
     const response = await request(app).get('/api/note/1');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('note:1');
+    expect(response.text).toBe(JSON.stringify(expectedResults));
+  });
+
+  it('should get an error if the note does exist', async () => {
+    const response = await request(app).get('/api/note/-1');
+    expect(response.status).toBe(404);
+    expect(response.text).toBe("-1");
   });
 
   it('should add a note', async () => {

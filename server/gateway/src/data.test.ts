@@ -20,13 +20,12 @@ describe('Data Tests', () => {
       {"datetime": "2020-03-01T10:10Z", "id": "1", "title": "My First Note",
        "text":"Text for my first note"}
     `);
-    const note = data.getNote(1);
+    const note = data.getNote('1');
     expect(note).toEqual(expectedResults);
   });
 
   test('getNote returns empty object if id is invalid', async () => {
-    const note = data.getNote(-1);
-    expect( Object.keys(note).length ).toBe(0);
+    expect( () => data.getNote('-1') ).toThrowError();
   });
 
   test('saveNote should save a note', async () => {
@@ -38,7 +37,7 @@ describe('Data Tests', () => {
 
     data.saveNote(1, "Edited Test Title", "Edited Test Text");
 
-    const note = data.getNote(1);
+    const note = data.getNote('1');
     expect(note).toEqual(expectedResults);
   });
 
@@ -61,14 +60,13 @@ describe('Data Tests', () => {
     const newNoteId = data.addNote();
     expect(newNoteId).toBe(5);
 
-    const note = data.getNote(newNoteId);
+    const note = data.getNote(newNoteId.toString());
     expect(note).toEqual(expectedResults);
   });
 
   test('deleteNote deletes the right note', async () => {
     data.deleteNote(2);
 
-    const note = data.getNote(2);
-    expect( Object.keys(note).length ).toBe(0);
+    expect( () => data.getNote('2') ).toThrowError();
   });
 });
