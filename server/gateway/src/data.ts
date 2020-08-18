@@ -41,7 +41,7 @@ export function getList() : unknown {
  * @param id id to convert to string
  * @throws Error if id is not valid
  */
-function getStrId(id: string) : string {
+function getCheckedId(id: string) : string {
   if( !(id in objList) )
     throw new Error("Note does not exist!");
   else
@@ -53,7 +53,7 @@ function getStrId(id: string) : string {
  * @param id : Id of the note to fetch
  */
 export function getNote(id: string) : unknown {
-  const strId = getStrId(id);
+  const strId = getCheckedId(id);
 
   const note = objList[strId];
   const clonedNote = Object.assign({},note);
@@ -101,9 +101,10 @@ export function addNote() : number {
  * Deletes a note
  * @param id Id of note to be deleted
  */
-export function deleteNote(id: number) : unknown {
-  delete objList[id.toString()];
-  delete objText[id.toString()];
+export function deleteNote(id: string) : string {
+  const checkedId = getCheckedId(id);
+  delete objList[checkedId];
+  delete objText[checkedId];
 
-  return true;
+  return checkedId;
 }

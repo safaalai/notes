@@ -65,8 +65,8 @@ describe('Data Tests', () => {
   });
 
   test('deleteNote deletes the right note', async () => {
-    data.deleteNote(2);
-
+    const deletedId = data.deleteNote('2');
+    expect(deletedId).toBe('2');
     expect( () => data.getNote('2') ).toThrowError();
   });
 });

@@ -23,5 +23,10 @@ router.put('/note/save/:id', (req,res) => {
 });
 
 router.delete('/note/:id', (req,res) => {
-  res.send('deleted note:'+req.params.id);
+  try {
+    const id = data.deleteNote(req.params.id);
+    res.send(id);  
+  } catch {
+    res.status(404).send(req.params.id);
+  }
 });
