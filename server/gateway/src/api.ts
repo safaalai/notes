@@ -15,7 +15,8 @@ router.get('/note/:id', (req,res) => {
 });
 
 router.post('/note/add', (req,res) => {
-  res.status(201).send('add new note');
+  const id = data.addNote();
+  res.status(201).send(id);
 });
 
 router.put('/note/save/:id', (req,res) => {

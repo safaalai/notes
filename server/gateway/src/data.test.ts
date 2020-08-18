@@ -58,7 +58,7 @@ describe('Data Tests', () => {
 
     // Add note 5 & check for results
     const newNoteId = data.addNote();
-    expect(newNoteId).toBe(5);
+    expect(newNoteId).toBe('5');
 
     const note = data.getNote(newNoteId.toString());
     expect(note).toEqual(expectedResults);
