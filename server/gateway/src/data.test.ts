@@ -35,7 +35,7 @@ describe('Data Tests', () => {
        "text":"Edited Test Text"}
     `);
 
-    data.saveNote(1, "Edited Test Title", "Edited Test Text");
+    data.saveNote('1', "Edited Test Title", "Edited Test Text");
 
     const note = data.getNote('1');
     expect(note).toEqual(expectedResults);

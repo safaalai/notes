@@ -68,7 +68,7 @@ export function getNote(id: string) : unknown {
  * @param newText : editted text for the note
  */
 export function saveNote(
-  id: number, newTitle: string, newText: string) : unknown  {
+  id: string, newTitle: string, newText: string) : string  {
   
   const note = objList[id.toString()];
   note.title = newTitle;
@@ -76,7 +76,7 @@ export function saveNote(
   const noteText = objText[id.toString()];
   noteText.text = newText;
 
-  return true;
+  return id;
 }
 
 /**

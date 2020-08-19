@@ -20,7 +20,8 @@ router.post('/note/add', (req,res) => {
 });
 
 router.put('/note/save/:id', (req,res) => {
-  res.send('save note:'+req.params.id);
+  const id = data.saveNote(req.params.id, req.body.title, req.body.text);
+  res.send(id);
 });
 
 router.delete('/note/:id', (req,res) => {
