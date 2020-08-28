@@ -1,4 +1,3 @@
-import * as Utils from './Utils';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:8080';
 
@@ -6,28 +5,6 @@ axios.defaults.baseURL = 'http://localhost:8080';
  * Data library for Notes
  * @packageDocumentation
  */
-/**
- * @ignore
- */
-const list = JSON.parse(
-  `[
-    {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
-    {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
-    {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
-    {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
-  ]`
-);
-const objList = Utils.array2Obj(list,'id');
-
-const text = JSON.parse(
-  `[
-    {"id":"1","text":"Text for my first note"},
-    {"id":"2","text":"Text for my Second note"},
-    {"id":"3","text":"Text for my Third note"},
-    {"id":"4","text":"Text for my Fourth note"}
-  ]`
-);
-const objText = Utils.array2Obj(text,'id');
 
 /**
  * Returns list of all notes
@@ -51,16 +28,15 @@ export async function getNote(id: number) {
  * @param id : Id of the note to save
  * @param newTitle : new title for the note
  * @param newText : editted text for the note
+ * 
+ * @returns id of document saved
  */
-export async function saveNote(id: number, newTitle: string, newText: string) {
-  const msg = await axios.put('/api/note/save/1');
-  console.log(msg.data);
-  
-  const note = objList[id.toString()];
-  note.title = newTitle;
-
-  const noteText = objText[id.toString()];
-  noteText.text = newText;
+export async function saveNote(
+  id: number, newTitle: string, newText: string) : Promise<number> {
+  const config = { headers: {'Content-Type': 'application/json'} };
+  const content = { title: newTitle, text: newText };
+  const response = await axios.put('/api/note/save/'+id, content, config);
+  return( parseInt(response.data) );
 }
 
 /**
