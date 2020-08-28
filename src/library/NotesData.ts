@@ -42,16 +42,8 @@ export async function getList() {
  * @param id : Id of the note to fetch
  */
 export async function getNote(id: number) {
-  if( !(id.toString() in objList))
-    return({});
-
-  const gatewayMsg = await axios.get('/api/note/1');
-  console.log(gatewayMsg.data);
-
-  const note = objList[id.toString()];
-  const clonedNote = Object.assign({},note);
-  clonedNote.text = objText[id.toString()].text;
-  return(clonedNote);
+  const response = await axios.get('/api/note/'+id);
+  return(response.data);
 }
 
 /**
@@ -76,30 +68,16 @@ export async function saveNote(id: number, newTitle: string, newText: string) {
  * 
  * @returns id of the note created
  */
-let idCount = 4;
 export async function addNote() : Promise<number> {
-  const msg = await axios.post('/api/note/add');
-  console.log(msg.data);
-  
-  const newId = (++idCount).toString();
-  objList[newId] = 
-    { id: newId, 
-      datetime: Utils.getDateTime(), 
-      title: 'untitled'
-    };
-  
-  objText[newId] = {id: newId, text: ''};
-  return(parseInt(newId));
+  const response = await axios.post('/api/note/add');
+  return(parseInt(response.data));
 }
 
 /**
  * Deletes a note
  * @param id Id of note to be deleted
  */
-export async function deleteNote(id: number) {
-  const msg = await axios.delete('/api/note/1');
-  console.log(msg.data);
-  
-  delete objList[id.toString()];
-  delete objText[id.toString()];
+export async function deleteNote(id: number) : Promise<number> {
+  const response = await axios.delete('/api/note/'+id);
+  return( parseInt(response.data) );
 }

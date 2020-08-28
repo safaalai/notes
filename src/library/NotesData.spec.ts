@@ -24,15 +24,9 @@ describe('NotesData Tests', () => {
       {"datetime": "2020-03-01T10:10Z", "id": "1", "title": "My First Note",
        "text":"Text for my first note"}
     `);
-    getMock.mockResolvedValue({data: 'note'});
+    getMock.mockResolvedValue({data: expectedResults});
     const note = await notesData.getNote(1);
     expect(note).toEqual(expectedResults);
-  });
-
-  test('getNote returns empty object if id is invalid', async () => {
-    getMock.mockResolvedValue({data: 'invalid id'});
-    const note = await notesData.getNote(-1);
-    expect( Object.keys(note).length ).toBe(0);
   });
 
   test('saveNote should save a note', async () => {
@@ -53,42 +47,19 @@ describe('NotesData Tests', () => {
   });
 
   test('addNote should add a new note', async () => {
-    const expectedResults = JSON.parse(`
-      {
-        "id":"5","datetime":"2020-05-14T11:20:00.000Z",
-        "title":"untitled",
-        "text":""
-      }
-    `);
-
-    // Mock Date.now() to return a fixed testable date-time
-    jest.spyOn(global.Date, 'now')
-      .mockImplementationOnce(() =>
-        new Date('2020-05-14T11:20Z').valueOf()
-      );
-
     // Mock axios.post
     const postMock = jest.spyOn(axios, 'post');
-    postMock.mockResolvedValue({data: 'added note'});
+    postMock.mockResolvedValue({data: '5'});
 
     // Add note 5 & check for results
     const newNoteId = await notesData.addNote();
     expect(newNoteId).toBe(5);
-
-    getMock.mockResolvedValue({data: 'added note'});
-    const note = await notesData.getNote(newNoteId);
-
-    expect(note).toEqual(expectedResults);
   });
 
   test('deleteNote deletes the right note', async () => {
     const deleteMock = jest.spyOn(axios,'delete');
-    deleteMock.mockResolvedValue({data: 'deleteMock'});
-    await notesData.deleteNote(2);
-
-    getMock.mockResolvedValue({data: 'deleted note'});
-    const note = await notesData.getNote(2);
-
-    expect( Object.keys(note).length ).toBe(0);
+    deleteMock.mockResolvedValue({data: '2'});
+    const noteId = await notesData.deleteNote(2);
+    expect(noteId).toBe(2);
   });
 });
