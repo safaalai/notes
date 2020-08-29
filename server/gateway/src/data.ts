@@ -7,25 +7,24 @@ import * as Utils from './Utils';
 /**
  * @ignore
  */
-const list = JSON.parse(
-  `[
-    {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
-    {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
-    {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
-    {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
-  ]`
-);
-const objList = Utils.array2Obj(list,'id');
+const listDefault =   `[
+  {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
+  {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
+  {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
+  {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
+]`;
 
-const text = JSON.parse(
-  `[
-    {"id":"1","text":"Text for my first note"},
-    {"id":"2","text":"Text for my Second note"},
-    {"id":"3","text":"Text for my Third note"},
-    {"id":"4","text":"Text for my Fourth note"}
-  ]`
-);
-const objText = Utils.array2Obj(text,'id');
+let list = JSON.parse(listDefault);
+let objList = Utils.array2Obj(list,'id');
+
+const textDefault =   `[
+  {"id":"1","text":"Text for my first note"},
+  {"id":"2","text":"Text for my Second note"},
+  {"id":"3","text":"Text for my Third note"},
+  {"id":"4","text":"Text for my Fourth note"}
+]`;
+const text = JSON.parse(textDefault);
+let objText = Utils.array2Obj(text,'id');
 
 /**
  * Returns list of all notes
@@ -107,4 +106,13 @@ export function deleteNote(id: string) : string {
   delete objText[checkedId];
 
   return checkedId;
+}
+
+/** Resets dummy data to known state */
+export function reset() : void {
+  list = JSON.parse(listDefault);
+  objList = Utils.array2Obj(list,'id');
+  const text = JSON.parse(textDefault);
+  objText = Utils.array2Obj(text,'id');
+  idCount = 4;
 }

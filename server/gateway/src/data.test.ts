@@ -69,4 +69,22 @@ describe('Data Tests', () => {
     expect(deletedId).toBe('2');
     expect( () => data.getNote('2') ).toThrowError();
   });
+
+  test('reset sets data back to defaults', () => {
+    // Change the data
+    data.addNote();
+
+    // Check that data is not as expected
+    const list = data.getList();
+    expect(list).not.toEqual(expectedData);
+    const id = data.addNote();
+    expect(id).not.toEqual('5');
+
+    // Reset data and check it matches defaults
+    data.reset();
+    const resetList = data.getList();
+    expect(resetList).toEqual(expectedData);
+    const resetId = data.addNote();
+    expect(resetId).toEqual('5');
+  });
 });
