@@ -24,7 +24,7 @@ describe('Data Tests', () => {
     expect(note).toEqual(expectedResults);
   });
 
-  test('getNote returns empty object if id is invalid', async () => {
+  test('getNote returns throws error if id is invalid', async () => {
     expect( () => data.getNote('-1') ).toThrowError();
   });
 
@@ -39,6 +39,10 @@ describe('Data Tests', () => {
 
     const note = data.getNote('1');
     expect(note).toEqual(expectedResults);
+  });
+
+  test('saveNote returns throws error if id is invalid', async () => {
+    expect( () => data.saveNote('-1', 'a', 'a') ).toThrowError();
   });
 
   test('addNote should add a new note', async () => {

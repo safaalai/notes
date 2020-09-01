@@ -44,4 +44,57 @@ describe('NotesData Integration Tests', () => {
       expect(error.response.data).toBe(-1);
     }
   });
+
+  it('should add a note', async () => {
+    // Create note and check id
+    const noteId = await notesData.addNote();
+    expect(noteId).toBe(5);
+
+    // Fetch note to make sure it was created
+    const note = await notesData.getNote(5);
+    expect(note.id).toBe(noteId.toString());
+    expect(note.text).toBe('');
+    expect(note.title).toBe('untitled');
+  });
+
+  it('should delete a note or get an error', async () => {
+    // delete note and check returned id
+    const noteId = await notesData.deleteNote(2);
+    expect(noteId).toBe(2);
+
+    // fetch note #2 to prove it does not exist
+    try {
+      await notesData.getNote(2);
+    } catch(error) {
+      expect(error.response.status).toBe(404);
+      expect(error.response.data).toBe(2);
+    }
+
+    // delete note that does not exist
+    try {
+      await notesData.deleteNote(2);
+    } catch(error) {
+      expect(error.response.status).toBe(404);
+      expect(error.response.data).toBe(2);
+    }
+  });
+
+  it('should save a note or get an error', async () => {
+    // save note and check returned id
+    const noteId = await notesData.saveNote(1, "Edited title", "Edited text");
+    expect(noteId).toBe(1);
+
+    // fetch saved note and check its content
+    const note = await notesData.getNote(1);
+    expect(note.title).toBe('Edited title');
+    expect(note.text).toBe('Edited text');
+
+    // test saving with a bad id
+    try {
+      await notesData.saveNote(-1, "Edited title", "Edited text");
+    } catch(error) {
+      expect(error.response.status).toBe(404);
+      expect(error.response.data).toBe(-1);
+    }
+  });
 });

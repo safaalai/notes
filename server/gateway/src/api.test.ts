@@ -76,6 +76,15 @@ describe('Gateway API Tests', () => {
     expect(response.text).toBe(JSON.stringify(expectedResults));
   });
 
+  it('should get an error if saving note that does not exist', async () => {
+    // save note
+    const response = await request(app)
+      .put('/api/note/save/-1')
+      .send({title: 'test title', text:'test text'});
+    expect(response.status).toBe(404);
+    expect(response.text).toBe("-1");
+  });
+
   it('should delete a note', async () => {
     const response = await request(app).delete('/api/note/1');
     expect(response.status).toBe(200);

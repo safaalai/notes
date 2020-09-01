@@ -68,11 +68,13 @@ export function getNote(id: string) : unknown {
  */
 export function saveNote(
   id: string, newTitle: string, newText: string) : string  {
-  
-  const note = objList[id.toString()];
+
+  const checkedId = getCheckedId(id);
+
+  const note = objList[checkedId.toString()];
   note.title = newTitle;
 
-  const noteText = objText[id.toString()];
+  const noteText = objText[checkedId.toString()];
   noteText.text = newText;
 
   return id;
