@@ -2,9 +2,10 @@ import {app} from './app';
 import request from 'supertest';
 
 describe('gateway tests', () => {
-  it('should say hello', async () => {
+  it('should serve web components', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello World!');
+    expect(response.text).toMatch('<!doctype html>');
+    expect(response.text).toMatch('<app-root></app-root');
   });
 });

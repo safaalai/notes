@@ -5,13 +5,11 @@ export const app = express();
 
 app.use(express.json());
 
+// Default path serves web pages
+app.use(express.static('dist/www'));
+
 app.use(cors());
 app.options('*', cors());
-
-app.get('/', (req,res) => {
-  console.log('get /');
-  res.send('Hello World!');
-});
 
 import * as api from './api';
 app.use('/api', api.router);
