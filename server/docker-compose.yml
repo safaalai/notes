@@ -1,0 +1,25 @@
+version: '3'
+ 
+services:
+  notes_gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    volumes: 
+      - ./gateway:/app
+      - /app/node_modules
+    command: npm run start.watch
+  cors_proxy:
+    build:
+      context: ./cors-proxy
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment: 
+      - GATEWAY=notes_gateway
+      - GATEWAY_PORT=8080
+    volumes: 
+      - ./cors-proxy:/app
+      - /app/node_modules
+    command: npm run start
+  

@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default async () => {
-  axios.defaults.baseURL = 'http://localhost:8080';
+  axios.defaults.baseURL = 'http://localhost:3000';
 };
