@@ -1,5 +1,4 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080';
 
 /**
  * Data library for Notes

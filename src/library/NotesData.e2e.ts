@@ -1,5 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8080';
+import app from '../global/app.dev';
+app();
 
 import * as notesData from './NotesData';
 
