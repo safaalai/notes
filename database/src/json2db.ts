@@ -1,11 +1,12 @@
 import axios from 'axios';
 import fs from 'fs';
 import argv from 'minimist';
+import chalk from 'chalk';
 
 /** json2db takes a script file and operates on HarperDB 
  * Command line arguments:
  * --target=<target environment>
- * --script=<script to run>
+ * --script=<script to run - an array of database commands>
  * 
  * Must have specified dbConfig.json
 */
@@ -31,9 +32,14 @@ const username = targetConfig.username;
 const password = targetConfig.password;
 const url = targetConfig.url;
 
-// Set up database script
+// Set up database script & check it is an array
 const dbScriptPath = './scripts/' + args.script + '.json';
 const dbScript = JSON.parse(fs.readFileSync(dbScriptPath).toString());
+if(!Array.isArray(dbScript)) {
+  console.log('JSON Script must be an array!');
+  console.log('Enclose JSON in square "[]" brackets.');
+  process.exit(0);
+}
 
 // Set up http configuration
 const httpConfig = {
@@ -45,6 +51,28 @@ const httpConfig = {
   }
 };
 
+// Loop through the array of scripts
+const runScript = async () => {
+  await asyncLoop(dbScript, async (script, index) => {
+    console.log(chalk.red.bold('RUNNING: ' + (index+1)));
+    console.log(JSON.stringify(script,null,2));
+    const response = await axios.post(url, script, httpConfig);
+    console.log(chalk.red.bold('RESPONSE:'));
+    console.log(JSON.stringify(response.data, null, 2));
+  });
+  console.log(chalk.red.bold('DONE!'));
+}
+runScript();
+
+// Async looper
+interface LooperCallBack {
+  (script: unknown, index:number): Promise<void>;
+}
+async function asyncLoop(scripts : Array<unknown>, callback: LooperCallBack) {
+  for (let index=0; index<scripts.length; ++index)
+    await callback(scripts[index], index);
+}
+
 // Call the database
-axios.post(url, dbScript, httpConfig)
-  .then( (response) => { console.log(response.data); });
+//axios.post(url, dbScript, httpConfig)
+//  .then( (response) => { console.log(response.data); });
