@@ -1,0 +1,7 @@
+{
+  "dev":{
+    "username":"HDB_ADMIN",
+    "password":"password",
+    "url":"http://localhost:9925/"
+  }
+}
