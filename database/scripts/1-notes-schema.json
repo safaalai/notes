@@ -1,0 +1,6 @@
+[
+  {
+    "operation":"create_schema",
+    "schema":"notes"
+  }
+]

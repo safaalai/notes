@@ -1,0 +1,8 @@
+[
+  {
+    "operation":"create_table",
+    "schema":"notes",
+    "table":"notes",
+    "hash_attribute":"id"
+  }
+]

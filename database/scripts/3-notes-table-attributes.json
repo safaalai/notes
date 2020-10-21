@@ -1,0 +1,14 @@
+[
+  {
+    "operation":"create_attribute",
+    "schema":"notes",
+    "table":"notes",
+    "attribute":"title"
+  },
+  {
+    "operation":"create_attribute",
+    "schema":"notes",
+    "table":"notes",
+    "attribute":"text"
+  }
+]
