@@ -3,16 +3,18 @@ import * as data from './data';
 describe('Data Tests', () => {
   const expectedData = JSON.parse(
     `[
-      {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
-      {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
-      {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
-      {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
+      {"title":"My First Note"},
+      {"title":"My Second Note"},
+      {"title":"My Third Note"},
+      {"title":"My Fourth Note"}
     ]`    
   );
 
-  test.skip('getList returns expected data', async () => {
-    const list = data.getList();
-    expect(list).toEqual(expectedData);
+  test('getList returns expected data', async () => {
+    const list = await data.getList();
+    expect(list.length).toBe(4);
+    for(let i=0; i<list.length; ++i)
+      expect(list[i].title).toBe(expectedData[i].title);
   });
 
   test.skip('getNote returns expected note', async () => {
@@ -86,9 +88,9 @@ describe('Data Tests', () => {
 
     // Reset data and check it matches defaults
     await data.reset();
-    // const resetList = data.getList();
-    // expect(resetList).toEqual(expectedData);
-    // const resetId = data.addNote();
-    // expect(resetId).toEqual('5');
+    const resetList = await data.getList();
+    expect(resetList.length).toBe(4);
+    for(let i=0; i<resetList.length; ++i)
+      expect(resetList[i].title).toBe(expectedData[i].title);
   });
 });

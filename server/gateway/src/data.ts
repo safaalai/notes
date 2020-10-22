@@ -31,11 +31,24 @@ const objText = Utils.array2Obj(text,'id');
 
 /**
  * Returns list of all notes
+ * 
+ * @returns array of noteListItem
  */
-export function getList() : unknown {
-  const arrayList = Object.values(objList);
-  const clonedList = JSON.parse(JSON.stringify(arrayList));
-  return(clonedList);
+export interface noteListItem {
+  id: string,
+  datetime: number,
+  title: string
+}
+export async function getList() : Promise<noteListItem[]> {
+  const response = await db.send({
+    "operation":"sql",
+    "sql":`
+      SELECT id,__createdtime__ AS datetime,title
+      FROM notes.notes
+      ORDER BY datetime
+    `
+  });
+  return(<noteListItem[]>response);
 }
 
 /**
@@ -127,7 +140,7 @@ export async function reset() : Promise<void> {
     "operation":"sql",
     "sql":"DELETE FROM notes.notes"
   });
-  console.log(response);
+  //console.log(response);
 
   // Add test records
   for(let i=0; i<dbResetData.length; ++i) {
@@ -138,6 +151,6 @@ export async function reset() : Promise<void> {
         VALUES('${dbResetData[i].title}','${dbResetData[i].text}')
       `
     });
-    console.log(response);
+    //console.log(response);
   }
 }
