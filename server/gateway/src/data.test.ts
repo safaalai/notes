@@ -17,17 +17,21 @@ describe('Data Tests', () => {
       expect(list[i].title).toBe(expectedData[i].title);
   });
 
-  test.skip('getNote returns expected note', async () => {
+  test('getNote returns expected note', async () => {
     const expectedResults = JSON.parse(`
-      {"datetime": "2020-03-01T10:10Z", "id": "1", "title": "My First Note",
+      {"title": "My First Note",
        "text":"Text for my first note"}
     `);
-    const note = data.getNote('1');
-    expect(note).toEqual(expectedResults);
+    const list = await data.getList();
+    const note = await data.getNote(list[0].id);
+    expect(note.id).toBe(list[0].id);
+    expect(note.datetime).toBe(list[0].datetime);
+    expect(note.title).toBe(expectedResults.title);
+    expect(note.text).toBe(expectedResults.text);
   });
 
-  test.skip('getNote returns throws error if id is invalid', async () => {
-    expect( () => data.getNote('-1') ).toThrowError();
+  test('getNote returns throws error if id is invalid', async () => {
+    expect( () => data.getNote('-1') ).rejects.toThrowError();
   });
 
   test.skip('saveNote should save a note', async () => {

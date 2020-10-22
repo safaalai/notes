@@ -67,13 +67,26 @@ function getCheckedId(id: string) : string {
  * Fetches data for a single note
  * @param id : Id of the note to fetch
  */
-export function getNote(id: string) : unknown {
-  const strId = getCheckedId(id);
-
-  const note = objList[strId];
-  const clonedNote = Object.assign({},note);
-  clonedNote.text = objText[strId].text;
-  return(clonedNote);
+export interface note {
+  id: string,
+  datetime: number,
+  title: string,
+  text: string
+}
+export async function getNote(id: string) : Promise<note> {
+  const response = <note[]> await db.send({
+    "operation":"sql",
+    "sql":`
+      SELECT id,__createdtime__ AS datetime,title,text
+      FROM notes.notes
+      WHERE id='${id}'
+    `
+  });
+  //console.log(`getNote( ${id} ) response:\n`+JSON.stringify(response,null,2));
+  if(response.length == 0)
+    throw new Error('No such note!');
+  else
+    return(response[0]);
 }
 
 /**
