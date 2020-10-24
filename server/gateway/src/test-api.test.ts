@@ -4,13 +4,13 @@ import * as testapi from './test-api';
 app.use('/test', testapi.router);
 
 describe('Test API Tests', () => {
-  it.skip('should reset data', async () => {
+  it('should reset data', async () => {
     const expectedData = JSON.parse(
       `[
-        {"id":"1","datetime":"2020-03-01T10:10Z","title":"My First Note"},
-        {"id":"2","datetime":"2020-03-02T11:11Z","title":"My Second Note"},
-        {"id":"3","datetime":"2020-03-03T12:12Z","title":"My Third Note"},
-        {"id":"4","datetime":"2020-03-04T13:13Z","title":"My Fourth Note"}
+        {"title":"My First Note"},
+        {"title":"My Second Note"},
+        {"title":"My Third Note"},
+        {"title":"My Fourth Note"}
       ]`    
     );
   
@@ -20,10 +20,8 @@ describe('Test API Tests', () => {
     // Check data does not match defaults
     let response = await request(app).get('/api/list');
     expect(response.status).toBe(200);
-    expect(response.text).not.toBe(JSON.stringify(expectedData));
-    response = await request(app).post('/api/note/add');
-    expect(response.status).toBe(201);
-    expect(response.text).not.toBe('5'); 
+    const list = JSON.parse(response.text);
+    expect(list.length).not.toBe(4);
 
     // Reset the data
     response = await request(app).put('/test/reset');
@@ -32,11 +30,11 @@ describe('Test API Tests', () => {
     // Check data is reset back to defaults
     response = await request(app).get('/api/list');
     expect(response.status).toBe(200);
-    expect(response.text).toBe(JSON.stringify(expectedData));
+    const resetList = JSON.parse(response.text);
+    expect(resetList.length).toBe(4);
 
-    // Check note id will be 5
-    response = await request(app).post('/api/note/add');
-    expect(response.status).toBe(201);
-    expect(response.text).toBe('5');
+    // Loop through list values to check they match expected results
+    for(let i=0; i<resetList.length; ++i)
+      expect(resetList[i].title).toBe(expectedData[i].title);
   });
 });
