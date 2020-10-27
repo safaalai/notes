@@ -15,6 +15,10 @@ services:
     build:
       context: ./gateway
       dockerfile: Dockerfile.dev
+    environment: 
+      - dbUsername=HDB_ADMIN
+      - dbPassword=password
+      - dbUrl=http://notes_db:9925
     volumes: 
       - ./gateway:/app
       - /app/node_modules
