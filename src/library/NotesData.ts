@@ -17,7 +17,7 @@ export async function getList() {
  * Fetches data for a single note
  * @param id : Id of the note to fetch
  */
-export async function getNote(id: number) {
+export async function getNote(id: string) {
   const response = await axios.get('/api/note/'+id);
   return(response.data);
 }
@@ -31,11 +31,11 @@ export async function getNote(id: number) {
  * @returns id of document saved
  */
 export async function saveNote(
-  id: number, newTitle: string, newText: string) : Promise<number> {
+  id: string, newTitle: string, newText: string) : Promise<string> {
   const config = { headers: {'Content-Type': 'application/json'} };
   const content = { title: newTitle, text: newText };
   const response = await axios.put('/api/note/save/'+id, content, config);
-  return( parseInt(response.data) );
+  return( response.data );
 }
 
 /**
@@ -43,16 +43,16 @@ export async function saveNote(
  * 
  * @returns id of the note created
  */
-export async function addNote() : Promise<number> {
+export async function addNote() : Promise<string> {
   const response = await axios.post('/api/note/add');
-  return(parseInt(response.data));
+  return( response.data );
 }
 
 /**
  * Deletes a note
  * @param id Id of note to be deleted
  */
-export async function deleteNote(id: number) : Promise<number> {
+export async function deleteNote(id: string) : Promise<string> {
   const response = await axios.delete('/api/note/'+id);
-  return( parseInt(response.data) );
+  return( response.data );
 }
