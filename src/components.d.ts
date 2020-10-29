@@ -12,9 +12,13 @@ export namespace Components {
     }
     interface FskNote {
         /**
+          * data-test property for testing
+         */
+        "dataTest": string;
+        /**
           * HTML property note-id: id of the note to display
          */
-        "noteId": number;
+        "noteId": string;
     }
     interface FskNotesList {
     }
@@ -58,9 +62,13 @@ declare namespace LocalJSX {
     }
     interface FskNote {
         /**
+          * data-test property for testing
+         */
+        "dataTest"?: string;
+        /**
           * HTML property note-id: id of the note to display
          */
-        "noteId"?: number;
+        "noteId"?: string;
         /**
           * Sent when user clicks on close button
           * @event

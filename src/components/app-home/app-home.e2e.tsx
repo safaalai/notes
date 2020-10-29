@@ -9,7 +9,7 @@ describe('app-home', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-  it.skip('shows a note on click', async () => {
+  it('shows a note on click', async () => {
     // Setup
     const page = await newE2EPage();
     await page.setContent('<app-home></app-home>');
@@ -22,7 +22,8 @@ describe('app-home', () => {
     await page.evaluate( () => {
       const appHome = document.querySelector('app-home');
       const notesList = appHome.shadowRoot.querySelector('fsk-notes-list');
-      const noteRow : HTMLElement = notesList.shadowRoot.querySelector('#note1');
+      const noteRow : HTMLElement = 
+        notesList.shadowRoot.querySelector('[data-test="note1"]');
       noteRow.click();
     });
 
@@ -32,6 +33,6 @@ describe('app-home', () => {
     const note1 = await page.find('app-home >>> fsk-note');
     expect(note1).not.toBeNull();
     expect(note1).toHaveAttribute('note-id');
-    expect(note1.getAttribute('note-id')).toBe('1');
+    expect(note1.getAttribute('data-test')).toBe('note1');
   });
 });

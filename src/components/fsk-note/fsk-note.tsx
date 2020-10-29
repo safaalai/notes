@@ -13,8 +13,11 @@ import { getNote, saveNote, deleteNote } from '../../library/NotesData';
 export class FskNote implements ComponentInterface {
   @Element() el: HTMLElement;
 
+  /** data-test property for testing */
+  @Prop() dataTest: string;
+
   /** HTML property note-id: id of the note to display */
-  @Prop() noteId: number;
+  @Prop() noteId: string;
 
   /** note to render */
   @State() note: any;

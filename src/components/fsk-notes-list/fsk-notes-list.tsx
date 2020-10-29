@@ -44,11 +44,12 @@ export class FskNotesList implements ComponentInterface {
 
   /**
    * Called by HTML table row when user clicks on the row
+   * @param datatest - id used for testing
    * @param noteid - id of the note selected
    */
-  onSelectNote(noteid: number) {
+  onSelectNote(datatest: string, noteid: number) {
     //console.log(noteid);
-    this.selectedNote.emit(noteid);
+    this.selectedNote.emit({'datatest':datatest,'noteid':noteid});
   }
 
   render() {
@@ -65,7 +66,8 @@ export class FskNotesList implements ComponentInterface {
           </thead>
           <tbody>
             {this.notes.map( (note:any, index:number) =>
-              <tr id={'note'+note.id} onClick={() => this.onSelectNote(note.id)}>
+              <tr data-test={'note'+(index+1)} 
+                onClick={() => this.onSelectNote('note'+(index+1),note.id)}>
                 <td>{index+1}</td>
                 <td>{dayjs(note.datetime)
                        .format('MMMM D, YYYY h:mm A')}</td>

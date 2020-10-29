@@ -18,7 +18,11 @@ export class AppHome {
    */
   @Listen('selectedNote')
   onSelectedNote(event: CustomEvent) {
-    this.noteDisplay = <fsk-note note-id={event.detail}></fsk-note>
+    this.noteDisplay = 
+      <fsk-note 
+        data-test={event.detail.datatest}
+        note-id={event.detail.noteid}>
+      </fsk-note>
   }
 
   /** Event handler for closeNote event */
@@ -28,7 +32,8 @@ export class AppHome {
   /** Event handler for add note button press */
   async onAddNote() {
     const noteId = await addNote();
-    this.noteDisplay = <fsk-note note-id={noteId}></fsk-note>
+    this.noteDisplay = 
+      <fsk-note data-test='note10' note-id={noteId}></fsk-note>
   }
 
   render() {

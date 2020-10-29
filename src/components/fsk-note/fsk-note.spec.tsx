@@ -108,7 +108,7 @@ describe('fsk-note', () => {
 
     // Check results are as expected
     const expectedSave =
-      {id: 1, title:'Test Note Title', text:'Test Note Content'};
+      {id: "1", title:'Test Note Title', text:'Test Note Content'};
     expect(JSON.stringify(saveOut[0])).toBe(JSON.stringify(expectedSave));
   });
 
@@ -127,7 +127,7 @@ describe('fsk-note', () => {
     button.click();
     await page.waitForChanges();
 
-    expect(deleteId).toBe(2);
+    expect(deleteId).toBe("2");
     expect(spy).toHaveBeenCalled();
   });
 });
