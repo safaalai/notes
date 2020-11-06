@@ -18,7 +18,7 @@ services:
     environment: 
       - dbUsername=HDB_ADMIN
       - dbPassword=password
-      - dbUrl=http://notes_db:9925
+      - dbUrl=https://safa-prod-alai.harperdbcloud.com
     volumes: 
       - ./gateway:/app
       - /app/node_modules

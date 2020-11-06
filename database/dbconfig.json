@@ -3,5 +3,10 @@
     "username":"HDB_ADMIN",
     "password":"password",
     "url":"http://localhost:9925/"
+  },
+  "prod":{
+    "username":"HDB_ADMIN",
+    "password":"password",
+    "url":"https://safa-prod-alai.harperdbcloud.com/"
   }
 }
